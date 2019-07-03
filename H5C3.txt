@@ -1,0 +1,604 @@
+﻿*********CSS3**********
+
+
+list-style : none 清除列表小圆点
+添加小图标一般是给元素添加类的方式 这样不会改变页面结构只要切换类
+首字下沉:浮动即可float:left(浮动初始目的:文字环绕效果)
+     
+
+全屏容器的布局
+    html,body默认是高度为0
+    html,body{
+        width:100%;
+        height:100%;
+    }
+    div{
+        width:100%;
+        height:100%;
+    }  
+
+
+00-基本选择器
+   通配符选择器 
+   标签选择器 
+   类选择器
+   id选择器
+
+
+01-css选择器
+    后代选择器  E F
+    子代选择器  E>F
+    相邻选择器(后面第一个兄弟元素且必须为F) 通配符可以忽略类型
+        E + F  eg: E + * ; E + li :后面第一个兄弟元素且是li的元素
+    兄弟选择器(后面所有的兄弟元素且类型为F的) 通配符可以忽略类型
+        E ~ F  eg: E ~ * ; E ~ li:后面所有的li元素
+
+02-属性选择器
+  1- E[att]选中所有包含某个attr属性的元素  eg:E[alt]
+  2- E[skill="sellMeng"]选中有skill属性为"sellMeng"的元素,必须完全相等(=的含义)  eg:E[skill="sellMeng"]可以; 
+      E[skill="sellMeng sellFrindes"]不行 
+  3- E[skill^="sell"]  选中skill属性开头为"sell"的元素
+  4- E[skill$="sell"]  选中skill属性结尾为"sell"的元素
+  5- E[skill*="sell"]  选中skill属性包含"sell"的元素
+
+03-伪类选择器  
+    :child系列(先找到父元素的第二个子元素,再判断是不是E)
+      E:first-child 匹配父元素的第一个子元素且是E元素  
+      E:last-child 匹配父元素的最后一个子元素且是E元素
+      E:nth-child(n) 匹配父元素的第n个子元素且是E元素
+      E:nth-last-child(n) 匹配父元素的倒数第n个子元素且是E元素  
+      E:nth-child(odd) 匹配父元素的奇数子元素且是E元素
+      E:nth-child(2n+1) 匹配父元素的奇数子元素且是E元素 
+      E:nth-child(even) 匹配父元素的偶数子元素且是E元素  
+      E:nth-child(2n) 匹配父元素的偶数子元素且是E元素 
+      E:only-child 匹配父元素的唯一一个子元素且是E元素 
+          eg: 
+          选中前两个
+          li:nth-child(-n+2) (不可以写成2-n)
+          选中后两个
+          li:nth-last-child(-n+2) (不可以写成2-n)
+    
+    :nth-of-type系列 用法与child系列很像，但是找的是子元素中对应类型的下标(先找类型再编号)
+
+04-其他伪类元素
+    :focus    查找获取到焦点的文本框
+    :checked 获得选中的checkbox
+    :disabled 获得不可用的框
+    :enabled 获得可用的框
+    :not(selector)选择不匹配selector的那些元素
+    :target  获取当前活跃的锚链接
+
+05-伪元素选择器(伪对象)
+    ::before作用:在子元素的最前面添加一个伪元素
+    ::after作用:在子元素的最后面添加一个伪元素
+             所以单标签不能使用伪元素选择器
+
+    伪元素使用注意事项
+        1.必须设置content属性
+        2.默认是行内元素
+            设置宽高
+              2.1转成块级
+              2.2脱标,浮动,定位(定位时注意父盒子也要定位)
+
+    单双冒号的问题:
+    如果需要兼容低版本浏览器 使用单冒号可以兼容低版本浏览器,兼容性比较好
+    如果不需要兼容低版本浏览器 使用双冒号 (移动端)
+    
+    伪元素before和after应用场景:小图标  遮罩层
+
+    ::first-letter 首字符(字母或者汉字)
+    ::first-line   首行
+    ::placeholder
+       IE浏览器中需加私有前缀进行兼容
+        1.需加前缀 input:-ms-input-placeholder
+        2.必须是单冒号才能兼容IE
+    ::selection 获取选中后的元素
+
+06-阴影
+   01-文字阴影
+      语法 text-shadow:水平偏移 垂直偏移 模糊度 颜色 
+        eg:text-shadow:2px 2px 2px red
+      可以添加多重阴影text-shadow:2px 2px 2px red,-2px 2px 2px blue,2px 2px 2px green;
+   02-边框阴影
+      语法 box-shadow:水平偏移 垂直偏移 模糊度 (外延值) 颜色 (inset) 
+         添加一个词insert 表示内阴影 加前后都行 也可以添加多重阴影
+        eg:box-shadow:2px 2px 2px (2px) #666 (inset);
+
+07-盒子模型box-sizing  (两种)
+    标准盒子模型  盒子大小, 宽度=border + padding + content
+    box-sizing : content-box
+    C3盒子模型  盒子宽度就是设置的width 如果设置了padding和border自动内减()
+    box-sizing : border-box 
+
+08-CSS3背景
+    background-size 设置背景图片的大小
+      1. 直接设置数值 
+        可能会变形 失真
+        background-size:800px 500px; 
+
+      2. 可以设置百分比,百分比相对于自身盒子宽高计算 
+        通用性好 也会变形失真
+        background-size:100% 100%;
+
+      3. 设置专用名词 contain 包含 
+        尽可能的放大背景图 让其等比例缩放 直到宽或者高和容器一样大
+        好处:完整的显示背景图片 缺点:可能会留白
+        background-size:contain;
+    
+      4. 设置专用名词 cover 覆盖
+        等比例缩放 放大到将整个盒子盖满
+        好处: 不会留白 缺点 会有一部分背景图片出去
+
+        常用:background-size:cover一般结合background-position:center center 使用; 
+    
+    background-clip 背景裁切,可以设置背景的显示范围
+        取值: 1.border-box(默认值) 显示范围 border + padding + content
+              2.padding-box 显示范围 padding + content
+              3.content-box 显示范围 content
+    
+    background-origin 可以设置背景原点
+        取值: 1.border-box 背景从border的左顶点开始显示
+              2.padding-box(默认值) 背景从padding的左顶点开始显示
+              3.content-box  背景从content的左顶点开始显示
+       
+    一般background-clip与background-origin组合使用
+       background-clip:content-box;
+       background-origin:content-box;
+    
+    多重背景 给盒子设置多张背景图片
+       注意点:
+         1.多个背景之间用逗号隔开
+         2.背景颜色必须要放在最后
+         background:url("./mn1.jpg) no-repeat left top,url("./mn2.jpg) no-repeat right top, pink;
+
+09-渐变 background-image
+    1.线性渐变
+        早期渐变效果有被几个图片实现 缺点:加载渐变背景需要发送蹄片请求
+        线性渐变的几个要素
+            1.方向
+                (1) 方位词,to right,to top,to bottom ,to left 
+                (2) 角度 0deg往上,顺时针方向 
+            2.颜色
+            3.范围
+                支持具体数值 和百分比()
+        语法: 
+        background-image:linear-gradient(方向,颜色,范围,颜色,范围,...)
+        eg:
+        background-image:linear-gradient(to right,red,yellow)
+        background-image:linear-gradient(90,deg,red,yellow)
+        background-image:linear-gradient(90,deg,red 0%,yellow 50%,blue 100%)
+        线性渐变实现的是背景图片 
+
+    2.径向渐变 
+        径向渐变的几大要素
+            1.圆的半径
+            2.圆心位置
+               (1) 方位词 left top right bottom center
+               (2) 设置具体数值(x,y)
+            3.颜色 范围,颜色 范围
+        公式: background-image:radial-gradient(半径 at 圆心位置 ,颜色,范围,颜色,范围,...)
+        超出半径范围的部分,使用外层颜色填充
+
+10-过渡 transition 让盒子在两个状态之间实现过渡动画
+    注意点:
+        1.过渡要求必须有两个状态
+        2.分成两个状态,过渡设置给A或者B都可以 但是具体给谁设看需求
+        3.过渡实现动画从性能上比通过js等设置宽高改大小,效率高
+    transition是一个复合属性 有很多子属性
+        1.过渡属性 transition-property 多个属性通过逗号隔开
+            transition-property:height,width,color
+            特殊值:all 让所有属性实现过渡(优点是方便 缺点是性能上效率较低低) 
+        2.过渡时间 transition-duration   
+            transition-duration:2s
+        3.过渡效果 transition-timing-function
+           (1) linear 匀速
+           (2) ease 缓动(默认)
+           (3) ease-in-out 从慢到快再到慢
+           (4) steps(步数) 可以将动画分成几步来执行
+        4.过渡延迟时间 transition-delay
+        
+        最常用的是合写(合写没有顺序问题,但是 过渡延迟  一定要放在 过渡时间 的后面)
+            transition:linear all 1s 1s
+
+11-2D转换 transform
+    合写问题:
+       1. transform属性只能写一个，如果写了多个会覆盖
+       2. transform属性可以连写，但是顺序对效果影响的，因为它会在第一个效果的基础上执行第二个效果，然后执行第三个效果（通常会把rotate放后面因为rotate会改变坐标系）
+       3. 如果对transform进行过度效果的时候，初始状态和结束状态一一对应
+    
+    1-缩放
+        transform:scale(x,y)
+        x 表示水平方向上的缩放
+        y 表示垂直方向上的缩放 
+        只有一个参数表示对水平垂直都进行缩放,好处 保持原比例,不会失真
+        transform:scale(2)
+
+        多种写法
+           transform:scaleX(参数)
+           transform:scaleY(参数)
+    2-变换基准点 transform-origin 
+        可以设置变换基准点,默认是center center
+            (1)支持方位词 left top bottom right center 
+                transform-origin:right center;
+            (2)支持具体坐标
+                transform-origin:100px 100px;
+    3-旋转 
+         transform:rotate(角度) 顺时针为正方向
+    4-平移
+         transform:translate(x,y)
+         transform:translateX(参数)
+         transform:translateY(参数)
+
+         注意点:
+             1.在原有基础上平移
+             2.平移如果设置的是百分比 是相对于自身宽高的计算(重要)
+             3.所有的变换只是视觉效果 不会影响其他盒子的布局
+    5-斜切
+       transform:skew(x角度,y角度) 
+       transform:skewX(角度) 表示在水平方向上倾斜 让y轴向x轴方向上靠实现倾斜
+       transform:skewY(角度) 表示在垂直方向上倾斜 让x轴向y轴方向上靠实现倾斜 
+
+12-3D变换
+    perspective  一般设置成1000px比较合适
+        1.给父元素设置perspective可以让子元素拥有近大远小的视觉效果
+        2.perspective:1000px;表示观察者离目标元素的距离
+    3d旋转
+        transform:rotateX(45deg);
+        transform:rotateY(45deg);
+        transform:rotateZ(45deg);
+
+        旋转方向的判断:
+             左手定则: 伸出左手, 握拳, 举大拇指, 让大拇指指向轴的正方向,
+                       手指卷曲的方向, 就是旋转的正方向
+
+    3d平移
+        transform:translateX(45deg);
+        transform:translateY(45deg);
+        transform:translateZ(45deg);
+    
+     transform-style 给父元素添加 用于指定子元素的布局方式
+         1. flat 指子元素在 2d 平面布局
+         2. preserve-3d 指定子元素在 3d 空间布局
+
+13-动画 
+    动画可以通过设置多个节点来精确控制一个或者一组动画，常用来实现复杂的动画效果。
+
+    动画与过渡的区别：
+        1. 过渡必须触发，需要两个状态的改变。
+        2. 动画可以一直运行下去，不需要触发。实现效果与过渡差不多
+
+    动画的使用
+      1. 声明动画
+         @keyframes 动画名称 { .... }
+         (1) from 和 to 表示从 from 的状态 动画到 to 的状态
+             from 表示起始状态, to 表示结束状态
+         (2) from to 只能设置两个状态,如果是复杂动画, 需要通过百分比设置
+
+      2. 使用动画
+        animation: 动画名称 动画时间;  至少设置这两个必要属性   
+        动画的八大参数:
+        1.动画名称 animation-name
+            animation-name:play;
+        2.动画时间 animation-duration
+            animation-duration:2s;
+        3.动画次数 animation-iteration-count
+            特殊值:infinite 无限次    
+        4.动画效果 animation-timing-function
+            (1) linear 匀速
+            (2) ease 缓动 (默认)
+            (3) ease-in-out 从慢到快再到慢
+            (4) steps(步数) 可以将动画分成几步来执行
+        5.动画延迟(动画延迟几秒开始执行) animation-delay
+            animation-delay:2s;
+        6.动画方向 animation-direction
+            (1)normal 正常,从from到to,再从from到to
+            (2)alternate 交替执行,从from到to,再从to到from
+        7.设置动画最终效果 animation-fill-mode
+            forwards:让动画执行完成后让盒子保留在最终状态(动画一直持续就无效了)
+            both:让盒子保留在最终状态 
+            both在设置动画延迟时,both会在0%的位置等待,forward是在动画原始位置等待(原始位置和0%位置不一样的情况下)
+        8.设置动画状态 animation-play-state   
+            (1)running 运行中(默认)
+            (2)paused 暂停
+    
+    动画参数合写:前后没有顺序要求,但是要求延迟时间写在动画时间之后
+        animation:play 2s infinite 2s
+    
+    组合动画: 多个动画用逗号隔开 注意不能写多个animation,会有覆盖问题
+    
+    动画库的使用(https://daneden.github.io/animate.css/)
+        引入了包后, 就相当于已经定义好了很多的动画
+       <link rel="stylesheet" href="./animate.css">
+
+       自定义动画时, 将动画从 animate.css 中考出, 进行覆盖定制
+
+14-字体图标
+    早期:页面有很多小图片,有很多次请求 通过精灵图只有一张图片 减少请求次数
+    精灵图缺点:1.使用起来麻烦 要算位置
+              2.可能会失真,不好
+    字体图标:1.使用起来方便 引包 写类名
+             2.可以任意设置大小,颜色和阴影 不失真(font-size color text-shadow)
+             3.可以节省网络请求
+    字体图标库 (库名:font Awesome)  
+        使用: 1.引包 不用引入字体文件(目录不能改动),在css中已经引入了字体文件,注意路径
+                 eg: <link rel="stylesheet" href="./fa/css/font-awesome.css">   
+              2.使用,添加类即可(比如使用arrows图标)
+                (1) 指定字体
+                    fa 字体名 是为了与其他字体图标区分
+                (2) 指定使用哪个图标 fa fa-图标名 eg: <i class="fa fa-arrows"></i>
+                    .fa-arrows {
+                       font-size: 100px;
+                       color: pink;
+                    }
+
+15 弹性布局
+    查询兼容性网站 can i use
+      
+    display:设置盒子的显示模式
+      1.none 隐藏
+      2.block 块级
+      3.inline 行内
+      4.inline-block 行内块 一行可以设置多个 可以设置宽高
+      5.flex 设置了display:flex的盒子就成为了一个伸缩盒子 就拥有了主轴和侧轴的概念 主轴水平往右,侧轴垂直往下的默认情况,子盒子在主轴方向水平向右进行分布
+
+    伸缩盒子, 弹性盒子, flex布局, 伸缩布局, 弹性布局 是同一个概念
+    
+    flex布局父盒子参数详解
+        1.flex-direction 控制主轴方向(了解)
+            (1) row 主轴水平向右
+            (2) coulmn 主轴垂直向下
+            (3) row-reverse 主轴水平向左
+            (4) coulmn-reverse 主轴垂直向上
+
+        2.justify-content 控制主轴对齐方式
+            (1) flex-start 从主轴开始位置对齐(左对齐)
+            (2) flex-end 从主轴结束位置对齐(右对齐)
+            (3) center 居中对齐
+            (4) space-between 让剩余空间在盒子间平均分布,两边没有
+            (5) space-around 让剩余空间环绕盒子,靠两边也有空间
+            (6) space-evenly 让剩余空间平均分布,两边一样有
+
+        3.align-items 设置侧轴单行的对齐方式
+            (1) flex-start 从侧轴起始位置开始布局
+            (2) flex-end 从侧轴结束位置开始布局
+            (3) center 在侧轴居中
+            (4) stretch 在侧轴进行拉伸,注意点:子盒子不设高度(了解)
+
+        4.flex-wrap 控制flex布局换行
+            (1) nowrap 默认值 不换行 ,如果盒子空间溢出 会对子盒子宽度进行压缩
+            (2) wrap 宽度不够时会换行
+
+        5.align-content 设置侧轴多行的对齐方式
+            (1) flex-start 从侧轴起始位置开始布局
+            (2) flex-end 从侧轴结束位置开始布局
+            (3) center 在侧轴居中
+            (4) stretch 在侧轴进行拉伸,注意点:子盒子不设高度(了解)
+            (5) space-between 
+            (6) space-around
+
+    flex布局给子盒子设置样式
+        1. flex 可以设置盒子所占的份数,先进行设置宽度的盒子的布局 再让子盒子按照份数进行分配父盒子剩余的空间
+            flex :1;
+        2. order 设置盒子的排布顺序(了解)
+            默认值order:0;数字越小越排列靠前
+        3. align-self 设置给子盒子,设置自己在侧轴方向上的对齐方式 优先级更高
+            参数:
+            (1) flex-start 从侧轴起始位置开始布局
+            (2) flex-end 从侧轴结束位置开始布局
+            (3) center 在侧轴居中
+            (4) stretch 在侧轴进行拉伸(了解)
+            
+            align-self是用来覆盖align-items,设置单独子元素的样式
+
+
+16-携程布局案例知识点:
+    手机端宽度320-640
+
+    最大宽 max-width 
+    最小宽 min-width  
+
+    解决下边间隙留白问题:display:block  
+
+    父元素设置display:flex 子元素可以设置宽高并且不会占一整行
+    
+    mousewheel 监听鼠标滚动 
+    让父元素内的定位子元素通过overflow:hidden隐藏 父元素要加定位
+
+
+
+************HTML5***************
+
+1.现象 :IE8以及IE8以下版本不支持html5语义化标签(header, footer, nav, section, aside, article...)
+    解决方案1:
+        1.在浏览器解析新标签前,先动态创建一次这个标签元素 document.createElement("header")
+        2.动态创建的新元素标签默认是一个行内标签,需要进行样式重置,转换成块级
+    解决方案2:
+        在head中 引入 html5shiv 插件包即可解决 IE 8 不识别 html5 语义化标签的问题
+        <script src="html5shiv.js"></script>(在body最后引入则无效)
+
+    问题:
+    但是在支持html5语义化标签的浏览器中, 这个js的执行就没有必要, 消耗了性能 
+    所以我们可以通过 CSS IE条件注释 只对IE8以及IE8以下版本做兼容性处理
+
+    CSS IE条件注释   
+    CSS IE条件注释专门用于兼容IE低版本
+    所以只有 IE9 及 IE9以下版本 才认识，其他版本的浏览器或者 IE10以上 的版本会当成注释, 不会解析,它里面有判断IE版本的方式
+            lte：就是Less than or equal to的简写，也就是小于或等于的意思。
+            lt ：就是Less than的简写，也就是小于的意思。
+            gte：就是Greater than or equal to的简写，也就是大于或等于的意思。
+            gt ：就是Greater than的简写，也就是大于的意思。
+        eg: <!--[if lte IE 8]>
+                <script src="html5shiv.js"></script>
+            <![endif]-->
+
+2.HTML5新增的类名操作
+   HTML5新增的类名操作API
+   2.1 classList
+       1. 添加 dom.classList.add(类名);
+       2. 移除 dom.classList.remove(类名);
+       3. 切换类 dom.classList.toggle(类名);(没有这个类则添加 有则移除)
+       4. 判断类 dom.classList.contains(类名);有则返回true 没有false
+
+3.html5自定义属性操作 (规范:所有自定义属性以 data- 开头)
+    问题:将来在工作中, 有一种很常见的做法, 就是将数据绑定在标签自定义属性中, 我们之前都需要通过 getAttribute 或者 setAttribute 一个一个获取, 当数据很多时, 就很麻烦
+
+    在 html5 中新增了一个对象 dataset, 可以专门操作 自定义属性
+    var div = document.querySelector("div");
+
+   div.dataset是一个对象, 可以将所有的自定义属性进行收集管理
+
+   (1) 获取性操作, 通过属性访问dataset对象即可, 属性名没有data-
+   console.log(div.dataset.id);
+   console.log(div.dataset['id']);
+
+
+   (2) 设置或者添加操作, 只需要修改 div.dataset 即可
+  div.dataset.id = "789"; 
+  div.dataset.pp = "帅鹏鹏";  
+
+
+  jq中$().data("id");
+
+4.检测用于检测网络状态的API;
+  1个属性,2个事件 
+
+  1个属性 
+    navigator.online 作用:检测用户是否在线,返回值true/false
+    (1) true 在线(联网状态) 局域网和互联网都算在线
+    (2) false 离线状态 断网了
+    consolelog(navigator.onLine)
+  2个事件  (只有切换时触发,一开始打开网页时无法触发 需要navigator.online来判断)
+    online 切换到在线状态时触发
+    offline 切换到离线状态时触发
+        需要给window注册网络状态事件(必须用addEventListener注册)
+        window.addEventListener("online", function () {
+            alert("online");
+        });
+
+        window.addEventListener("offline", function () {
+            alert("offline");
+        });
+
+5. 获取当前地理位置的API
+    语法:navigator.geolocation.getCurrentPosition(successCallback, errorCallback)
+    参数1:成功的回调函数 返回一个position对象 这个对象里面有个属性coords 里面有用户的经纬度等地理位置信息
+    参数2:失败的回调函数
+
+    PC端: chrome,火狐定位请求的页面要求要是https协议的, 所以PC端测试在IE下测试
+   =须是https协议的。
+
+
+6. web本地存储 cookie sessionStorage localStorage
+    数据想要持久存储就必须存储在内存硬盘中
+    存储:localStorage.setItem(key,value);
+    获取:console.log(localStorage.getItem("name"));  如果没有获取到, 返回是 null
+    1.cookie 
+        特点:
+        (1) 大小4k;
+        (2) 默认生命周期是会话级别(浏览器关闭就销毁了),也可以设置过期时间
+        (3) cookie中的数据,会在请求时进行携带
+            可以利用cookie实现登录状态保持(会话保持),通过在cookie中存储sessionid;
+        (4) cookie在同一个网站中,多个页面可以共享
+
+        cookie 原生操作 document.cookie
+            1. cookie 存储需要满足键值对的格式
+            2. 如果进行 document.cookie赋值, 是进行追加属性
+            添加, cookie 要求格式: 键值对  键=值 的格式
+                document.cookie = "name=pp";
+                document.cookie = "age=18";
+                document.cookie = "desc=帅";
+
+            设置
+                document.cookie = "desc=呵呵";
+                获取, 获取得到的是所有 cookie 字符串,
+                如果需要拿到单个的属性值, 需要切割字符串, 进行获取
+                console.log(document.cookie);
+
+        cookie的缺点:大小太小 原生操作很麻烦(可以通过jQuery.cookie.js插件)
+            1. 引包
+               <script src="jquery-1.12.2.js"></script>
+               <script src="jquery.cookie.js"></script>
+            2. 使用 api 操作 cookie
+                $.cookie(key, value)  // 设置, 添加
+                $.cookie(key)     // 获取
+                $.removeCookie(key)  // 移除
+        
+         html5 中出了 sessionStorage localStorage 专门用于解决cookie存储空间太小的问题
+    2. sessionStorage 鸡肋 (了解, 没用)
+      (1) 生命周期, 一旦关闭浏览器就销毁了
+      (2) 多个窗口之间不能共享数据
+      (3) 大小 5M
+  
+    3. localStorage 重点
+      (1) 生命周期, 永久存储, 只要用户不手动删除
+      (2) 多个窗口之间可以共享
+      (3) 大小 5M     1M=1024k
+  
+  
+   api熟记: (sessionStorage 和 localStorage api 一样的)
+      1. 获取操作: localStorage.getItem(key);
+      2. 设置操作: localStorage.setItem(key,value);
+      3. 删除单个: localStorage.removeItem(key);
+      4. 清空所有: localStorage.clear();
+
+        
+7.自定义视频播放器
+    全屏切换API：
+      video.requestFullScreen()
+    方法：
+      load()、play()、pause() 
+    属性：
+      currentTime:当前时间
+      duration：总长时间
+      timeupdate:播放进度更改时触发
+      volume：控制音量
+
+    timeupdate事件 当目标播放位置更改时触发
+
+8.文件读取(FileReader)  纯前端实现文件预览
+    tip: 1.文件上传框添加multiple可以上传多文件
+         2.file类型的input会有 files 属性，保存着文件的相关信息
+         3.file对象只获取到了对文件的描述信息，但没有获得文件中的数据，可以通过html5提供的FileReader读取到文件中的数据。
+         4.URL.createObjectURL()方法会根据传入的参数创建一个指向该参数对象的URL. 这个URL的生命仅存在于它被创建的这个文档里. 新的对象URL指向执行的File对象或者是Blob对象.
+            url = URL.createObjectURL(file);
+
+    FileReader提供的方法
+        readAsArrayBuffer(file)	按字节读取文件内容，结果用ArrayBuffer对象表示
+        readAsBinaryString(file)	按字节读取文件内容，结果为文件的二进制串
+        readAsDataURL(file)	读取文件内容，结果用data:url的字符串形式表示(常用)
+        readAsText(file,encoding)	按字符读取文件内容，结果用字符串形式表示(常用)
+        abort()	终止文件读取操作
+
+    步骤:
+    var input = document.querySelector("input");
+    var div = document.querySelector("div");
+
+    //利用 change 方法监听用户选择文件
+    input.addEventListener("change", function() {
+        console.log( this.files );
+        // 1. 获取文件对象
+        var file = this.files[0];
+    //  console.log(file);
+    
+        // 2. fileReader对象可以用于读取文件, 创建fileReader对象  ()可以省略
+        var fileReader = new FileReader();
+
+        // 3. 调用fileReader对象的方法, 进行读取文件
+        fileReader.readAsDataURL( file );
+
+        // 4. 需要添加 onload事件(当读取操作成功完成时调用) 监听文件读取
+        //    读取文件是需要时间的
+        fileReader.onload = function() {
+        // 5. 获取结果
+        var result = fileReader.result;
+        div.innerHTML = '<img src="' + result + '">';
+        }
+    })
+    
+9.拖拽
+  给元素添加一个 draggable="true" 可以让元素可拖拽 
+  目标元素的两个事件:
+     1. dragover 拖拽元素(设置了draggable="true的元素)停留在目标元素上(以鼠标为基准的)时触发;
+     2. drop  拖拽元素在目标元素上,松开鼠标时触发;
+     浏览器默认阻止了drop事件的触发,需要在dragover内取消浏览器的默认行为 e.preventDefault(); 
+任何一个盒子都可以成为目标元素
