@@ -1,12 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        body{
+            /* background-color: rgb(204, 204, 204) */
+        }
+        .app {
+            margin: 200px auto;
+            background-clip: padding-box;
+            width:800px;
+            height: 500px;
+            cursor: pointer;
+            /* 模拟实线边框 可以设置多层颜色*/
+            /* box-shadow: 0 0 0 10px inset #fff, 0 0 0 15px deeppink,0 2px 5px 15px rgba(0,0,0,.6); */
+            /* 通过outline描边实现边框 描边会遮盖其他相邻*/
+            /* background: pink;  */
+            border: 20px solid yellowgreen; 
+            outline: 2px dashed deeppink;
+            /* 设置描边与border的距离 */
+            outline-offset:-10px;
+            border-radius: 10px;
+            /* cacl函数 进行加减乘除运算 在calc() 函数 内部的- 和 + 运算符的两侧各加 一个空白符，否则会产生解析错误*/
+            /* position:absolute;
+            top:calc(50%-500px); */
+            /* background: url('./img.png') no-repeat;  */
+            /* 设置背景图片的位置 */
+            /* background-position: top 2px left 10px; */
+            /* background-origin:padding-box; */
+            /* padding:20px; */
+            /* 通过cal函数自动调整位置 */
+            /* background-position: calc(100% - 20px) calc(100% - 10px); */
+            /* 设置背景渐变 */
+            /* background-image: linear-gradient(30deg ,#fb3 50%, #58a 50%);
+            background-size:10% 10%; */
+            /* background: linear-gradient(45deg, #fb3 25%, #58a 0, #58a 50%, #fb3 0, #fb3 75%, #58a 0); */
+            background-size: 100px 100px;
+            /* background: linear-gradient(45deg, #fb3, #fb3 15px, #58a 0, #58a 30px); */
+            /* background-repeat:no-repeat; */
+        }
+    </style>
 </head>
+
 <body>
-    
+    <div class="app">
+        
+    </div>
+    <script>
+        
+    </script>
 </body>
+
 </html>
