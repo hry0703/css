@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>垂直水平居中</title>
+    <style>
+        /* 水平居中
+        *   1.如果是行内元素的水平居中只要对他的父元素设置text-align:center
+        *   2.如果是块级元素就对其自身设置margin:0 auto 
+        */
+        /* 不定宽高的元素垂直居中
+        *   1.基于绝对定位加平移的方案
+                注意点: 
+                    1.1：绝对定位对布局影响过于强烈
+                    1.2：如果需要居中的元素在高度上超过适口，超出部分的顶部会被裁切掉 多复制p标签就会出现此情况
+        *   2.基于视口单位的方案
+                注意点：
+                    2.1：只适合元素在视口中居中的场景
+        *   3.基于flexBox的方案
+        */
+        body{
+            /* 3.基于flexBox */
+            display: flex;
+            min-height:100vh;
+            margin:0;
+        }
+        main {
+            background-color: aqua;
+            /* 1.基于绝对定位加平移 */
+            /* position:absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%) */
+            /* 2.基于视口单位 */
+            /* width:25em;  
+            padding:1em 1.5em;
+            margin:50vh auto 0;
+            transform: translateY(-50%) */
+            margin:auto
+        }
+        h1,p {
+            /* text-align:center */
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Am I centered yet?</h1>
+        <p>Center me,please!</p>
+    </main>
+    
+</body>
+
+</html>

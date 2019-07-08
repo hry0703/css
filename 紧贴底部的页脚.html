@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>紧贴底部的页脚</title>
+    <style>
+        html,body{
+            padding:0;
+            margin:0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            background-color: aqua;
+            flex:1
+        }
+        footer {
+            background-color: black;
+            color: #fff;
+        }
+        /*定位也可以但是绝对定位影响布局*/
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Am I centered yet?</h1>
+        <p>Center me,please!</p>
+    </main>
+    <footer>
+        dahdasdasda
+    </footer>
+    
+</body>
+
+</html>
